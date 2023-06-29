@@ -88,6 +88,12 @@ const config = {
             position: 'left',
             label: '알고리즘',
           },
+          {
+            type: 'docSidebar',
+            sidebarId: 'cultureSidebar',
+            position: 'left',
+            label: '개발문화',
+          },
           {to: '/blog', label: '소식', position: 'left'},
           {
             href: 'https://github.com/KoHyunsu',

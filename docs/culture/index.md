@@ -2,4 +2,4 @@
 sidebar_position: 1
 ---
 
-# 웹
+# 개발 문화
