@@ -6,6 +6,10 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
   title: '고봉밥.com',
   tagline: `든든한 한 끼 같은 지식을 모아봅니다`,
   favicon: 'img/gobongbap.png',
@@ -28,8 +32,8 @@ const config = {
   // metadata like html lang. For example, if your site is Chinese, you may want
   // to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: 'kr',
+    locales: ['kr'],
   },
 
   presets: [
@@ -160,6 +164,11 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+      },
+      algolia : {
+        appId: '200ZJCKBVH',
+        apiKey: 'c64de0ace26c11d53b52933840757a4b',
+        indexName: 'blog',
       },
     }),
 };
