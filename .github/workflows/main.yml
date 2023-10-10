@@ -44,6 +44,7 @@ jobs:
       - name: Yarn Build
         run: |
           yarn
+          yarn swizzle docusaurus-lunr-search SearchBar -- --eject --danger
           yarn build
             
       - name: Docker Setup QEMU

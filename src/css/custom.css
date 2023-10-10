@@ -32,13 +32,13 @@ b.navbar__title {
 }
 
 :root {
-  --ifm-color-primary: #000000;
-  --ifm-color-primary-dark: #000000;
-  --ifm-color-primary-darker: #000000;
-  --ifm-color-primary-darkest: #000000;
-  --ifm-color-primary-light: #000000;
-  --ifm-color-primary-lighter: #000000;
-  --ifm-color-primary-lightest: #000000;
+  --ifm-color-primary: #2696E0;
+  --ifm-color-primary-dark: #1d88ce;
+  --ifm-color-primary-darker: #1c80c3;
+  --ifm-color-primary-darkest: #176aa0;
+  --ifm-color-primary-light: #3da1e3;
+  --ifm-color-primary-lighter: #48a7e5;
+  --ifm-color-primary-lightest: #6bb7ea;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }

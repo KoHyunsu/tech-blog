@@ -9,6 +9,9 @@ const config = {
   markdown: {
     mermaid: true,
   },
+  plugins: [[ require.resolve('docusaurus-lunr-search'), {
+    languages: ['en', 'ko'] // language codes
+  }]],
   themes: ['@docusaurus/theme-mermaid'],
   title: '고봉밥.com',
   tagline: `든든한 한 끼 같은 지식을 모아봅니다`,
@@ -32,8 +35,8 @@ const config = {
   // metadata like html lang. For example, if your site is Chinese, you may want
   // to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'kr',
-    locales: ['kr'],
+    defaultLocale: 'ko',
+    locales: ['ko'],
   },
 
   presets: [
@@ -162,7 +165,7 @@ const config = {
         disableSwitch: true,
       },
       prism: {
-        theme: lightCodeTheme,
+        theme: require('prism-react-renderer/themes/vsDark'),//lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
       algolia : {
