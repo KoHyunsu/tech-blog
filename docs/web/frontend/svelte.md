@@ -71,7 +71,16 @@ let b = 2;
 - [REPL](https://svelte.dev/repl/hello-world?version=4.2.1) : 브라우저에서 Svelte 코드(.svelte)를 입력하면 그 결과를 바로 확인 가능
 
 - [로컬 환경](https://kit.svelte.dev/docs/creating-a-project) : 실습을 진행할 컴퓨터에 [Node.js](https://nodejs.org/ko) 설치 후 다음 명령어 순서대로 수행
-    - 
+    
+    - (사전 준비) [Node.js](https://nodejs.org/ko) 설치 
+
+    ```bash
+    # 다음 명령어 순서대로 수행
+    npm create svelte@latest my-svelte-app
+    cd my-svelte-app
+    npm install
+    npm run dev
+    ```
 
 ## State
 
@@ -79,32 +88,58 @@ let b = 2;
 
 메인 이벤트가 발생했을 때 그와 연결된 나머지 이벤트들도 이어서 반응하고 자동으로 발생 가능
 
+[Reactivity 공식 문서](https://svelte.dev/docs/svelte-components#script-2-assignments-are-reactive)
+
 ## Event
+
+[Event 공식 문서](https://svelte.dev/docs/element-directives#on-eventname)
 
 ## Props
 
+[Props 공식 문서](https://svelte.dev/docs/basic-markup#attributes-and-props)
+
 ## Block
+
+[Logic Block 공식 문서](https://svelte.dev/docs/logic-blocks)
 
 ## Binding
 
+[Bind 공식 문서](https://svelte.dev/docs/element-directives#bind-property)
+
 ## Slot
+
+[<slot> 공식 문서](https://svelte.dev/docs/special-elements#slot)
 
 ## context API
 
+[Context 공식 문서](https://svelte.dev/docs/svelte#setcontext)
+
 ## dispatch
+
+[Dispatch 공식 문서](https://svelte.dev/docs/svelte#createeventdispatcher)
 
 ## store
 
+[Store 공식 문서](https://svelte.dev/docs/svelte-store)
+
 ## transition
+
+[Transition 공식 문서](https://svelte.dev/docs/svelte-motion)
 
 ## motion
 
+[Motion 공식 문서](https://svelte.dev/docs/svelte-motion)
+
 ## actions
+
+[Action 공식 문서](https://svelte.dev/docs/svelte-action)
+
+## <svelte\>
+
+[<svelte> 공식 문서](https://svelte.dev/docs/special-elements#svelte-self)
 
 ## ~~fetch~~
 
-## axios
+## ~~axios~~
 
 ## ~~rollup~~
-
-## <svelte\>
