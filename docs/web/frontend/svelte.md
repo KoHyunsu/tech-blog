@@ -84,6 +84,8 @@ let b = 2;
 
 ## State
 
+[State 공식 문서](https://freeseamew.gitbook.io/svelte/3./state)
+
 ## Reactivity
 
 메인 이벤트가 발생했을 때 그와 연결된 나머지 이벤트들도 이어서 반응하고 자동으로 발생 가능
