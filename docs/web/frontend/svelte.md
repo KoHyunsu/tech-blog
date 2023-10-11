@@ -108,7 +108,7 @@ let b = 2;
 
 ## Slot
 
-[<slot> 공식 문서](https://svelte.dev/docs/special-elements#slot)
+[<slot\> 공식 문서](https://svelte.dev/docs/special-elements#slot)
 
 ## context API
 
@@ -136,7 +136,7 @@ let b = 2;
 
 ## <svelte\>
 
-[<svelte> 공식 문서](https://svelte.dev/docs/special-elements#svelte-self)
+[<svelte\> 공식 문서](https://svelte.dev/docs/special-elements#svelte-self)
 
 ## ~~fetch~~
 
