@@ -18,3 +18,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+node_modules
+
+tina/__generated__
+.env
+env.bat

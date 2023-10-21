@@ -11,6 +11,12 @@ $ yarn
 $ yarn start
 ```
 
+### 관리 환경
+```
+$ yarn tina
+```
+http://localhost:3000/admin 접속 후 문서 수정
+
 ### 운영 환경
 ```
 $ yarn build
