@@ -60,7 +60,7 @@
               "link": "none",
               "items": [
                 {
-                  "document": "docs/test-page.mdx",
+                  "document": "docs/intro.mdx",
                   "label": "",
                   "_template": "doc"
                 }
