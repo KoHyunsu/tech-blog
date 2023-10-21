@@ -46,7 +46,6 @@ jobs:
           export TINA_TOKEN=${{ secrets.TINA_TOKEN }}
           export NEXT_PUBLIC_TINA_CLIENT_ID=${{ secrets.NEXT_PUBLIC_TINA_CLIENT_ID }}
           yarn
-          yarn swizzle docusaurus-lunr-search SearchBar -- --eject --danger
           yarn build
             
       - name: Docker Setup QEMU
