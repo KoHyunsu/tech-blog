@@ -1,0 +1,39 @@
+.landing_page_title {
+    padding-top: 20px;
+    font-size: 54pt;
+    font-family: 'Amazon Ember V2', sans-serif;
+    font-weight: 700;
+    background: -webkit-linear-gradient(0deg, #000000, #414141);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+[data-theme='dark'] {
+    .landing_page_title {
+        background: -webkit-linear-gradient(0deg, #ffffff, #c4c4c4);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}
+
+.landing_page_subtitle {
+    font-size: 16pt;
+    font-family: 'Amazon Ember', sans-serif;
+    font-weight: 300;
+    margin-top: -12px;
+}
+
+.landing_page_title_box {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.landing_page_getting_started_button {
+    margin-top: 30px;
+}
+
+.tech_icon_box {
+    margin-top: 60px;
+}

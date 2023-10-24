@@ -20,11 +20,13 @@
     "@docusaurus/theme-classic": "^2.4.3",
     "@mdx-js/react": "^1.6.22",
     "@tinacms/cli": "^1.5.29",
+    "antd": "^5.10.2",
     "clsx": "^1.2.1",
     "docusaurus-lunr-search": "^3.2.0",
     "prism-react-renderer": "^1.3.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-router-dom": "^6.17.0",
     "tinacms": "^1.5.20",
     "title": "^3.5.3"
   },

@@ -129,7 +129,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: docusaurusData.title || "",
+        //title: docusaurusData.title || "",
         logo: {
           alt: docusaurusData?.logo?.alt
             ? docusaurusData?.logo?.alt

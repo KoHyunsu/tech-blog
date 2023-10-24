@@ -1,3 +1,5 @@
+@import url('https://fonts.cdnfonts.com/css/amazon-ember');
+
 /**
  * Any CSS included here will be global. The classic template
  * bundles Infima by default. Infima is a CSS framework designed to
@@ -27,4 +29,12 @@
   --ifm-color-primary-lighter: #32d8b4;
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+* {
+  font-family: 'Amazon Ember', sans-serif;
+}
+
+.navbar__title {
+  font-family: 'Amazon Ember V2', sans-serif;
 }
