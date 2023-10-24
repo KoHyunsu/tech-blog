@@ -22,6 +22,7 @@ import jenkinsIcon from '/static/img/landing_page/jenkins_icon.png';
 import helmIcon from '/static/img/landing_page/helm_icon.png';
 import prometheusIcon from '/static/img/landing_page/prometheus_icon.png';
 import grafanaIcon from '/static/img/landing_page/grafana_icon.png';
+import techseoulIcon from '/static/img/tech_seoul_icon.png';
 
 
 const text = `
@@ -57,10 +58,13 @@ export const TechSeoulComponent = ({config}) => {
     return (
         <>
             <Row justify={'center'}>
+                <Col span={20} className={styles.main_image} >
+                  <img src={techseoulIcon} alt="tech_seoul" />
+                </Col>
                 <Col span={20} className={styles.landing_page_title_box}>
                     <div className={styles.landing_page_title}>TECH SEOUL</div>
                     <div className={styles.landing_page_subtitle}>현수의 기술 블로그</div>
-                    <Button onClick={() => {history.push('/docs/intro')}} className={styles.landing_page_getting_started_button}>시작하기</Button>
+                    <Button size="large" onClick={() => {history.push('/docs/intro')}} className={styles.landing_page_getting_started_button}>시작하기</Button>
                     <Row gutter={24} justify={'center'}  className={styles.tech_icon_box}>
                         <Col xs={3} sm={3} md={2} lg={2} xl={1}><img src={htmlIcon} alt="html" /></Col>
                         <Col xs={3} sm={3} md={2} lg={2} xl={1}><img src={cssIcon} alt="css" /></Col>
