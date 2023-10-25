@@ -4,11 +4,11 @@
     {
       "label": "문서",
       "link": "doc",
-      "docLink": "docs/intro.mdx",
+      "to": "docs/category/html",
       "position": "left"
     },
     {
-      "label": "블로그",
+      "label": "소식",
       "link": "blog",
       "position": "left"
     },
@@ -24,6 +24,7 @@
     "src": "/img/tech_seoul_icon.png"
   },
   "title": "TECH SEOUL",
+  "tagline" : "현수의 기술 블로그",
   "footer": {
     "style": "dark",
     "links": [],

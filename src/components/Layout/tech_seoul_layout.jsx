@@ -9,6 +9,7 @@ import jsIcon from '/static/img/landing_page/js_icon.png';
 import nodejsIcon from '/static/img/landing_page/nodejs_icon.png';
 import reactjsIcon from '/static/img/landing_page/reactjs_icon.png';
 import nextjsIcon from '/static/img/landing_page/nextjs_icon.png';
+import svelteIcon from '/static/img/landing_page/svelte_icon.png';
 import nestjsIcon from '/static/img/landing_page/nestjs_icon.png';
 import awsIcon from '/static/img/landing_page/aws_icon.png';
 import dockerIcon from '/static/img/landing_page/docker_icon.png';
@@ -24,36 +25,32 @@ import prometheusIcon from '/static/img/landing_page/prometheus_icon.png';
 import grafanaIcon from '/static/img/landing_page/grafana_icon.png';
 import techseoulIcon from '/static/img/tech_seoul_icon.png';
 
-
-const text = `
-  A dog is a type of domesticated animal.
-  Known for its loyalty and faithfulness,
-  it can be found as a welcome guest in many households across the world.
-`;
-
-const items = [
-  {
-    key: '1',
-    label: 'This is panel header 1',
-    children: <p>{text}</p>,
-  },
-  {
-    key: '2',
-    label: 'This is panel header 2',
-    children: <p>{text}</p>,
-  },
-  {
-    key: '3',
-    label: 'This is panel header 3',
-    children: <p>{text}</p>,
-  },
-];
+const icons = [
+  {src: htmlIcon, alt: 'html'},
+  {src: cssIcon, alt: 'css'},
+  {src: jsIcon, alt: 'js'},
+  {src: nodejsIcon, alt: 'nodejs'},
+  {src: reactjsIcon, alt: 'reactjs'},
+  {src: nextjsIcon, alt: 'nextjs'},
+  {src: svelteIcon, alt: 'svelte'},
+  {src: nestjsIcon, alt: 'nestjs'},
+  {src: awsIcon, alt: 'aws'},
+  {src: dockerIcon, alt: 'docker'},
+  {src: k8sIcon, alt: 'k8s'},
+  {src: argocdIcon, alt: 'argocd'},
+  {src: terraformIcon, alt: 'terraform'},
+  {src: ansibleIcon, alt: 'ansible'},
+  {src: githubactionIcon, alt: 'githubaction'},
+  {src: gitIcon, alt: 'git'},
+  {src: jenkinsIcon, alt: 'jenkins'},
+  {src: helmIcon, alt: 'helm'},
+  {src: prometheusIcon, alt: 'prometheus'},
+  {src: grafanaIcon, alt: 'grafana'},
+]
 
 export const TechSeoulComponent = ({config}) => {
 
     const history = useHistory();
-
-    console.log('siteConfig:', config);
 
     return (
         <>
@@ -62,30 +59,16 @@ export const TechSeoulComponent = ({config}) => {
                   <img src={techseoulIcon} alt="tech_seoul" />
                 </Col>
                 <Col span={20} className={styles.landing_page_title_box}>
-                    <div className={styles.landing_page_title}>TECH SEOUL</div>
-                    <div className={styles.landing_page_subtitle}>현수의 기술 블로그</div>
-                    <Button size="large" onClick={() => {history.push('/docs/intro')}} className={styles.landing_page_getting_started_button}>시작하기</Button>
-                    <Row gutter={24} justify={'center'}  className={styles.tech_icon_box}>
-                        <Col xs={3} sm={3} md={2} lg={2} xl={1}><img src={htmlIcon} alt="html" /></Col>
-                        <Col xs={3} sm={3} md={2} lg={2} xl={1}><img src={cssIcon} alt="css" /></Col>
-                        <Col xs={3} sm={3} md={2} lg={2} xl={1}><img src={jsIcon} alt="js" /></Col>
-                        <Col xs={3} sm={3} md={2} lg={2} xl={1}><img src={nodejsIcon} alt="node" /></Col>
-                        <Col xs={3} sm={3} md={2} lg={2} xl={1}><img src={reactjsIcon} alt="react" /></Col>
-                        <Col xs={3} sm={3} md={2} lg={2} xl={1}><img src={nextjsIcon} alt="next" /></Col>
-                        <Col xs={3} sm={3} md={2} lg={2} xl={1}><img src={nestjsIcon} alt="nest" /></Col>
-                        <Col xs={3} sm={3} md={2} lg={2} xl={1}><img src={awsIcon} alt="aws" /></Col>
-                        <Col xs={3} sm={3} md={2} lg={2} xl={1}><img src={dockerIcon} alt="docker" /></Col>
-                        <Col xs={3} sm={3} md={2} lg={2} xl={1}><img src={k8sIcon} alt="k8s" /></Col>
-                        <Col xs={3} sm={3} md={2} lg={2} xl={1}><img src={argocdIcon} alt="argocd" /></Col>
-                        <Col xs={3} sm={3} md={2} lg={2} xl={1}><img src={terraformIcon} alt="terraform" /></Col>
-                        <Col xs={3} sm={3} md={2} lg={2} xl={1}><img src={ansibleIcon} alt="ansible" /></Col>
-                        <Col xs={3} sm={3} md={2} lg={2} xl={1}><img src={prometheusIcon} alt="prometheus" /></Col>
-                        <Col xs={3} sm={3} md={2} lg={2} xl={1}><img src={grafanaIcon} alt="grafana" /></Col>
-                        <Col xs={3} sm={3} md={2} lg={2} xl={1}><img src={helmIcon} alt="helm" /></Col>
-                        <Col xs={3} sm={3} md={2} lg={2} xl={1}><img src={jenkinsIcon} alt="jenkins" /></Col>
-                        <Col xs={3} sm={3} md={2} lg={2} xl={1}><img src={gitIcon} alt="git" /></Col>
-                        <Col xs={3} sm={3} md={2} lg={2} xl={1}><img src={githubactionIcon} alt="github_action" /></Col>
-                    </Row>
+                  <div className={styles.landing_page_title}>{config.title}</div>
+                  <div className={styles.landing_page_subtitle}>{config.tagline}</div>
+                  <Button size="large" onClick={() => {history.push('/docs/category/html')}} className={styles.landing_page_getting_started_button}>시작하기</Button>
+                </Col>
+                <Col span={20} className={styles.landing_page_title_box}>
+                  <Row gutter={24} justify={'center'}  className={styles.tech_icon_box}>
+                      {
+                        icons.map(({src, alt}) => (<Col xs={4} sm={3} md={2} lg={2} xl={2} xxl={1}><img src={src} alt={alt} /></Col>))
+                      }
+                  </Row>
                 </Col>
             </Row>
             {/*<Row justify={'center'}>

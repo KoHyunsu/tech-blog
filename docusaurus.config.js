@@ -74,6 +74,10 @@ const formatNavbarItem = (item, subnav = false) => {
     navItem.docId = getDocId(item.docLink);
   }
 
+  if (item.link === "doc" && !item.docLink) {
+    navItem.to = item.to;
+  }
+
   if (item.items) {
     navItem.type = "dropdown";
     navItem.items = item.items.map((subItem) => {

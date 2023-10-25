@@ -5,15 +5,16 @@
 
 .main_image img {
     text-align: center;
-    max-width: 200px;
+    max-width: 160px;
     width: 20vw;
 }
 
 .landing_page_title {
-    padding-top: 20px;
+    padding-top: 24px;
     font-size: 54pt;
-    font-family: 'Amazon Ember V2', sans-serif;
+    font-family: 'SeoulNamsan ExtraBold', sans-serif;
     font-weight: 700;
+    line-height: 1em;
     background: -webkit-linear-gradient(0deg, var(--main_title_left_color), var(--main_title_right_color));
     background-clip: text;
     -webkit-background-clip: text;
@@ -21,10 +22,9 @@
 }
 
 .landing_page_subtitle {
-    font-size: 18pt;
-    font-family: 'Amazon Ember', sans-serif;
-    font-weight: 300;
-    margin-top: -12px;
+    font-size: 20pt;
+    font-family: 'SeoulNamsan Light', sans-serif;
+    line-height: 3em;
 }
 
 .landing_page_title_box {
@@ -33,7 +33,7 @@
 }
 
 .landing_page_getting_started_button {
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .tech_icon_box {

@@ -1,4 +1,28 @@
 @import url('https://fonts.cdnfonts.com/css/amazon-ember');
+@font-face {
+  font-family: 'SeoulNamsan ExtraBold';
+  src: url('/static/fonts/SeoulNamsanEB.ttf');
+}
+@font-face {
+  font-family: 'SeoulNamsan Bold';
+  src: url('/static/fonts/SeoulNamsanB.ttf');
+}
+@font-face {
+  font-family: 'SeoulNamsan Medium';
+  src: url('/static/fonts/SeoulNamsanM.ttf');
+}
+@font-face {
+  font-family: 'SeoulNamsan Light';
+  src: url('/static/fonts/SeoulNamsanL.ttf');
+}
+@font-face {
+  font-family: 'SeoulNamsan Vert';
+  src: url('/static/fonts/SeoulNamsanvert.ttf');
+}
+@font-face {
+  font-family: 'SeoulNamsan Long Medium';
+  src: url('/static/fonts/서울남산\ 장체M.ttf');
+}
 
 /**
  * Any CSS included here will be global. The classic template
@@ -38,9 +62,13 @@
 }
 
 * {
-  font-family: 'Amazon Ember', sans-serif;
+  font-family: 'SeoulNamsan Light', sans-serif;
+}
+
+.navbar__item {
+  font-family: 'SeoulNamsan Light', sans-serif;
 }
 
 .navbar__title {
-  font-family: 'Amazon Ember V2', sans-serif;
+  font-family: 'SeoulNamsan ExtraBold', sans-serif;
 }
