@@ -1,0 +1,59 @@
+---
+title: React
+description: The library for web and native user interface
+tags:
+  - frontend
+  - react
+---
+
+### Frontend
+
+<Admonition type="tip" title="출처">
+  [https://whycantwefindfed.jjperezaguinaga.com/](https://whycantwefindfed.jjperezaguinaga.com/)
+</Admonition>
+
+프론트엔드 엔지니어에 대한 오해
+
+* 프론트엔드 개발은 쉽다.
+* 프론트엔드 개발자는 뛰어난 개발 역량이 필요한 엔지니어라기보단 디자이너에 가깝다.
+
+프론트엔드 엔지니어가 실제로 하는 일
+
+* 시각적 디자인에서 "Set of Components"를 정의
+* 디바이스, 브라우저, 화면, 애니메이션 측면에서 웹 애플리케이션의 범위를 정의
+* 접근성, 검색엔진 최적화, 스키마 등을 고려하여 웹 애플리케이션의 코드를 작성
+* API에 연결하여 서버와 데이터를 주고받는 것까지 구현
+* 부드러운 애니메이션, 상호작용 등과 관련하여 성능 및 호환성까지 고려
+
+### SPA
+
+Single Page Application
+
+하나의 페이지에서 전체 웹 서비스를 구현
+
+웹에 필요한 모든 정적 리소스를 한번에 다운로드 받고,
+
+페이지 간 이동 시 갱신에 필요한 데이터(json 등)을 주고받아 페이지를 갱신
+
+Before SPA![](/img/기존웹.png)
+
+SPA![](/img/SPA.png)
+
+장점
+
+* 부드러운 사용자 경험 (페이지 이동 등등)
+* 필요한 부분만 갱신하기에 전체적인 트래픽 감소
+* 각 요소(Component)들을 분리해 모듈화하여 관리 가능
+
+단점
+
+* 초기 구동속도가 느림 (초기에 모든 정적 리소스 다운로드 받기 때문)
+* 검색엔진 최적화(SEO)가 어려움 (대부분의 검색엔진은 HTML 파싱하여 정보 만드는데, SPA는 뼈대 HTML 위에 동적으로 내용을 생성하기에 뼈대 HTML만 검색엔진에 노출됨)
+
+### React
+
+UI를 만들기 위한 JavaScript 라이브러리
+
+MVC(Model-View-Controller) 패턴 중 View만을 담당
+
+Opensource로서
