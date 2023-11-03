@@ -35,9 +35,9 @@ Single Page Application
 
 페이지 간 이동 시 갱신에 필요한 데이터(json 등)을 주고받아 페이지를 갱신
 
-Before SPA![](/img/기존웹.png)
+Before SPA![beforespa](/img/기존웹.png)
 
-SPA![](/img/SPA.png)
+SPA![spa](/img/SPA.png)
 
 장점
 
@@ -82,10 +82,10 @@ function Welcome(props) {
 }
 ```
 
-* * 클래스형 컴포넌트
-    * JavaScript의 클래스 문법 차용
-    * React.Component로부터 상속을 받아야 함
-    * render() 메소드가 반드시 필요
+* 클래스형 컴포넌트
+  * JavaScript의 클래스 문법 차용
+  * React.Component로부터 상속을 받아야 함
+  * render() 메소드가 반드시 필요
 
 ```javascript
 class Welcome extends React.Component {
@@ -177,7 +177,9 @@ src/의 파일은 빌드 시 웹팩에 의해 후처리가 된 후 build/에 포
 
 ### JSX
 
-const element: JSX.Element = \<h1>Hello, World!\</h1>;
+```js
+const element: JSX.Element = \<h1>Hello, World!\</h1>`
+```
 
 위에 HTML도 아니고, JavaScript도 아닌 특이한 문법을 가진 코드는 JSX입니다. JSX는 JavaScript를 확장한 문법으로, 자바스크립트 코드를 HTML처럼 표현할 수 있기 때문에 React 개발 시 용이하게 사용됩니다. 이렇게 작성된 JSX 코드는 브라우저에서 실행되기 전에 바벨을 사용하여 일반 자바스크립트 형태의 코드로 변환됩니다.
 
@@ -201,7 +203,4 @@ background-color, font-size와 같은 속성을 camelCase 명명 규칙을 따�
 ✨ camelCase프로그래밍에서 파일, 변수, 함수 등 대상의 이름을 작성할 때 띄어쓰기 없이 짓기 위하여 따르는 네이밍 컨벤션 중 하나입니다. 단어 전체적으로 소문자를 사용하지만, 맨 첫 글자를 제외한 각 합성어의 첫 글자는 대문자로 표기합니다. ex) camelCase, isCamelCase
 
 * 닫는 태그가 없는 태그들도 반드시 닫아주어야 한다.
-
-<!---->
-
 * 주석 사용
