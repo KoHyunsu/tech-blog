@@ -138,13 +138,14 @@ npx create-react-app 원하는\_프로젝트명
 
 이 도구를 이용해 아래와 같이 간단한 React Project를 생성할 수 있다.
 
-원하는\_프로젝트명
+```
+원하는_프로젝트명
 ├── README.md
 ├── .gitignore
-├── package-lock.json
+├── package - lock.json
 ├── package.json
 ├── tsconfig.json
-├── node\_modules
+├── node_modules
 │ └── ...
 ├── public
 │ ├── favicon.ico
@@ -161,6 +162,7 @@ npx create-react-app 원하는\_프로젝트명
 ├── logo.svg
 ├── reportWebVitals.tsx
 └── setupTests.tsx
+```
 
 \[ public/과 src/의 차이 ]
 
@@ -177,8 +179,8 @@ src/의 파일은 빌드 시 웹팩에 의해 후처리가 된 후 build/에 포
 
 ### JSX
 
-```js
-const element: JSX.Element = \<h1>Hello, World!\</h1>`
+```javascript
+const element: JSX.Element = <h1>Hello, World!\</h1>
 ```
 
 위에 HTML도 아니고, JavaScript도 아닌 특이한 문법을 가진 코드는 JSX입니다. JSX는 JavaScript를 확장한 문법으로, 자바스크립트 코드를 HTML처럼 표현할 수 있기 때문에 React 개발 시 용이하게 사용됩니다. 이렇게 작성된 JSX 코드는 브라우저에서 실행되기 전에 바벨을 사용하여 일반 자바스크립트 형태의 코드로 변환됩니다.
