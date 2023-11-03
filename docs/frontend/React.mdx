@@ -82,8 +82,7 @@ function Welcome(props) {
 }
 ```
 
-*
-  * 클래스형 컴포넌트
+* * 클래스형 컴포넌트
     * JavaScript의 클래스 문법 차용
     * React.Component로부터 상속을 받아야 함
     * render() 메소드가 반드시 필요
@@ -155,13 +154,13 @@ npx create-react-app 원하는\_프로젝트명
 │ ├── manifest.json
 │ └── robots.txt
 └── src
-  ├── App.css
-  ├── App.tsx 
-  ├── index.css
-  ├── index.tsx
-  ├── logo.svg
-  ├── reportWebVitals.tsx
-  └── setupTests.tsx
+├── App.css
+├── App.tsx
+├── index.css
+├── index.tsx
+├── logo.svg
+├── reportWebVitals.tsx
+└── setupTests.tsx
 
 \[ public/과 src/의 차이 ]
 
@@ -182,7 +181,6 @@ const element: JSX.Element = \<h1>Hello, World!\</h1>;
 
 위에 HTML도 아니고, JavaScript도 아닌 특이한 문법을 가진 코드는 JSX입니다. JSX는 JavaScript를 확장한 문법으로, 자바스크립트 코드를 HTML처럼 표현할 수 있기 때문에 React 개발 시 용이하게 사용됩니다. 이렇게 작성된 JSX 코드는 브라우저에서 실행되기 전에 바벨을 사용하여 일반 자바스크립트 형태의 코드로 변환됩니다.
 
-
 ✨ 바벨(Babel)?
 바벨은 ES6+ 버전 이상의 자바스크립트나 JSX 코드를 현재 및 과거의 브라우저와 같은 환경에서 호환되는 버전으로 변환하는 데 주로 사용되는 도구입니다.
 
@@ -192,6 +190,7 @@ JSX도 다른 언어들과 같이 지켜야 할 규칙이 몇 가지 있습니�
 
 React를 처음 시작했을 때 오류가 가장 많이 발생하는 지점입니다. JSX는 반드시 최상단의 단일 Tag에서 시작해야 합니다. React가 사용하는 Virtual DOM 방식에서는 컴포넌트 변화를 감지할 때 효율적으로 비교하고자 컴포넌트 내부는 하나의 DOM 트리 구조로 이루어져야 한다는 규칙이 있기 때문입니다. 이때, 최상단 단일 Tag는 \<div> 외에도 \<Fragment>, \<>를 사용할 수 있습니다.
 
+```
 function App() {
 &#x9;return (
 &#x9;	\<div>
@@ -208,11 +207,13 @@ function App() {
 &#x9;	\<div>World!\</div>
 &#x9;);
 }
+```
 
 * 자바스크립트 표현식
 
-JSX 내부에서도 자바스크립트 표현식을 사용할 수 있습니다. 자바스크립트 표현식은 중괄호 {} 안에 작성합니다.
+JSX 내부에서도 자바스크립트 표현식을 사용할 수 있습니다. 자바스크립트 표현식은 중괄호 `{}`안에 작성합니다.
 
+```
 function App() {
 &#x9;const name: string = 'SCG';
 &#x9;return (
@@ -222,11 +223,13 @@ function App() {
 &#x9;	\</div>
 &#x9;);
 }
+```
 
 * HTML 어트리뷰트 이름 대신 camelCase 프로퍼티 명명 규칙을 사용한다.
 
 background-color, font-size와 같은 속성을 camelCase 명명 규칙을 따라 backgroundColor, fontSize처럼 작성합니다. 또한 class를 지정할 때에는 className으로 작성합니다.
 
+```
 function App() {
 &#x9;const style\:CSSProperties = {
 &#x9;		backgroundColor: 'green',
@@ -237,12 +240,13 @@ function App() {
 &#x9;	\<div className='scg' style={style}>Hello, World!\</div>
 &#x9;);
 }
-
+```
 
 ✨ camelCase프로그래밍에서 파일, 변수, 함수 등 대상의 이름을 작성할 때 띄어쓰기 없이 짓기 위하여 따르는 네이밍 컨벤션 중 하나입니다. 단어 전체적으로 소문자를 사용하지만, 맨 첫 글자를 제외한 각 합성어의 첫 글자는 대문자로 표기합니다. ex) camelCase, isCamelCase
 
 * 닫는 태그가 없는 태그들도 반드시 닫아주어야 한다.
 
+```
 function App() {
 &#x9;return (
 &#x9;	\<div>
@@ -253,9 +257,11 @@ function App() {
 &#x9;	\</div>
 &#x9;);
 }
+```
 
 * 주석 사용
 
+```
 function App() {
 &#x9;return (
 &#x9;	\<div>
@@ -264,3 +270,4 @@ function App() {
 &#x9;	\</div>
 &#x9;);
 }
+```
