@@ -5,13 +5,13 @@
 
 .main_image img {
     text-align: center;
-    max-width: 160px;
+    max-width: 200px;
     width: 20vw;
 }
 
 .landing_page_title {
-    padding-top: 24px;
-    font-size: 54pt;
+    padding-top: 48px;
+    font-size: 60pt;
     font-family: 'SeoulNamsan ExtraBold', sans-serif;
     font-weight: 700;
     line-height: 1em;

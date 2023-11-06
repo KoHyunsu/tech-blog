@@ -29,7 +29,8 @@ import javaIcon from '/static/img/landing_page/java_icon.png';
 import springIcon from '/static/img/landing_page/spring_icon.png';
 import pythonIcon from '/static/img/landing_page/python_icon.png';
 import fastapiIcon from '/static/img/landing_page/fastapi_icon.png';
-import techseoulIcon from '/static/img/tech_seoul_icon.png';
+// import techseoulIcon from '/static/img/tech_seoul_icon.png';
+import gobongbapIcon from '/static/img/gobongbap_landing.png';
 
 const icons = [
   {src: htmlIcon, alt: 'html'},
@@ -69,17 +70,17 @@ export const TechSeoulComponent = ({config}) => {
         <>
             <Row justify={'center'}>
                 <Col span={20} className={styles.main_image} >
-                  <img src={techseoulIcon} alt="tech_seoul" />
+                  <img src={gobongbapIcon} alt="gobongbap" />
                 </Col>
                 <Col span={20} className={styles.landing_page_title_box}>
                   <div className={styles.landing_page_title}>{config.title}</div>
                   <div className={styles.landing_page_subtitle}>{config.tagline}</div>
                   <Button size="large" onClick={() => {history.push('/docs/category/html')}} className={styles.landing_page_getting_started_button}>시작하기</Button>
                 </Col>
-                <Col span={20} className={styles.landing_page_title_box}>
+                <Col xs={18} sm={16} md={12} className={styles.landing_page_title_box}>
                   <Row gutter={24} justify={'center'}  className={styles.tech_icon_box}>
                       {
-                        icons.map(({src, alt}) => (<Col xs={4} sm={3} md={2} lg={2} xl={2} xxl={1}><img src={src} alt={alt} /></Col>))
+                        icons.map(({src, alt}) => (<Col xs={4} sm={4} md={3} lg={3} xl={3} xxl={2}><img src={src} alt={alt} /></Col>))
                       }
                   </Row>
                 </Col>

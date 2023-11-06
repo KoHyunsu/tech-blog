@@ -20,10 +20,10 @@
     }
   ],
   "logo": {
-    "alt": "Tech-Seoul",
-    "src": "/img/tech_seoul_icon.png"
+    "alt": "Gobongbap",
+    "src": "/img/gobongbap_landing.png"
   },
-  "title": "TECH SEOUL",
+  "title": "고봉밥.com",
   "tagline" : "현수의 기술 블로그",
   "footer": {
     "style": "dark",
