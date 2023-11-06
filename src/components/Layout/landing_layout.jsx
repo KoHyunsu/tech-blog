@@ -62,7 +62,7 @@ const icons = [
   {src: fastapiIcon, alt: 'fastapi'}
 ]
 
-export const TechSeoulComponent = ({config}) => {
+export const LandingComponent = ({config}) => {
 
     const history = useHistory();
 
