@@ -1,0 +1,86 @@
+---
+title: Typescript
+description: Learning Typescript
+tags:
+  - TypeScript
+  - typescript
+  - ts
+---
+
+# TypeScript 입문서
+
+## 🧐 타입스크립트 왜 필요한가?
+
+자바스크립트는 기본적으로 `동적 타이핑(Dynamic Typing)` 기반의 언어이다.
+
+```js
+console.log(5 - '3'); // '3'을 알아서 숫자로 바꾸어 계산하기에 숫자 2가 출력된다.
+```
+
+덕분에 편리한 점도 있지만 이러한 동적 타이핑 때문에 개발자가 예상하지 못하는 케이스도 존재하게 된다.
+
+```js
+function addFive(num){
+	return num + 5;
+}
+
+addFive(5);  // return 10
+
+addFive("five"); // return "five5"
+```
+
+* Q. 코드 결과를 예측해보자
+
+```ts
+const users = [{ id: 1, name: "a" }, { id: 2, name: "b" }];
+
+function findUser(id) {
+  return users.find(user => user.id === id);
+}
+
+// URL에서 받아온 쿼리 스트링이라고 가정. ex) /search?userId=1
+const queryString = {
+  userId: "1"
+}
+
+const { userId } = queryString;
+
+console.log(findUser(userId)); // 출력값은? undefined.
+```
+
+* (부록) JS의 자동 형변환
+
+```js
+('b' + 'a' + + 'a' + 'a').toLowerCase();
+
+{} + "x"
+
+(![]+[])[+[]]+([][[]]+[])[+[]]+([][[]]+[])[+!![]]
+```
+
+* 정답1
+
+```js
+'banana'
+```
+
+* 정답2
+
+```js
+NaN
+```
+
+* 정답3
+
+```js
+'fun'
+```
+
+* 해설
+
+[PhilipFabianek's comment from discussion "JavaScript is Weird (all explanations are in the comments)"](https://www.reddit.com/r/learnjavascript/comments/thuc7w/javascript_is_weird_all_explanations_are_in_the/i19vsmp/)
+
+이러한 예측 불가능한 경우들과 불편함을 보완하고자 만들어진 것이 바로 타입스크립트이다. 타입스크립트는 `정적 타이핑(Static Typing)` 기반의 언어이기 때문에 위와 같은 상황을 일으키는 것을 방지해준다. 이외에 타입스크립트가 얻을 수 있는 이점들을 확인해보자.
+
+* 훨씬 더 자세한 에러 원인을 확인할 수 있다.
+* 어떤 코드를 작성해야될지 IDE의 도움(=자동완성)을 제공받을 수 있다.
