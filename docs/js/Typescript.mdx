@@ -84,3 +84,999 @@ NaN
 
 * 훨씬 더 자세한 에러 원인을 확인할 수 있다.
 * 어떤 코드를 작성해야될지 IDE의 도움(=자동완성)을 제공받을 수 있다.
+
+## 🎮 타입스크립트 실행해보기
+
+브라우저는 자바스크립트가 아닌 언어는 이해하지 못한다. 타입스크립트 또한 예외는 아니다.
+
+타입스크립트로 작성한 코드(`.ts`)는 자바스크립트(`.js`)로 변환해주어야 한다. 이 과정을 `컴파일`이라고 한다.
+
+컴파일을 하는 방법은 다양하게 존재하지만, 해당 문서의 목적은 타입스크립트 자체에 익숙해지는 것을 목표로 하고 있기에 우선 아래 타입스크립트 공식 사이트의 playground를 이용하여 실습을 해보도록 하자.
+
+[TS Playground - An online editor for exploring TypeScript and JavaScript](https://www.typescriptlang.org/play)
+
+프로젝트 세팅을 알아보고 싶다면 다음 키워드들에 typescript를 포함하여 검색해보는 것을 추천한다.
+
+* tsc, tsconfig, javascript bundler (webpack, parcel, vite, …)
+  * 번들러의 경우 자바스크립트 생태계에서 매우 중요한 역할을 하고있으므로, 시간날 때 한번씩 번들러가 어떤 역할을 하는지 공부해보는 것을 추천한다.
+
+## 🍏 타입과 타입 표기 (Type Annotation)
+
+* `boolean` - `true` or `false`
+
+```ts
+let isComplete: boolean = true;
+```
+
+* `number` - 정수, 실수를 포함한 모든 숫자들
+
+```ts
+let num: number = 10;
+```
+
+* `string` - 문자열
+
+```ts
+let str: string = 'SCG';
+```
+
+* `object` - 객체
+
+```ts
+const user: { name: string; height: number; } = { 
+  name: 'abc', height: 176 
+};
+```
+
+* ⭐️ `Optional properties`
+
+```ts
+const user: { name: string; height?: number; } = { 
+  name: 'abc' 
+} // no error
+
+const user: { name: string; height?: number; } = { 
+  name: 'abc', 
+  height: 176 
+} // no error
+```
+
+* `Array` - 배열을 표시하는 타입
+
+```ts
+let arr: number[] = [1,2,3]; 
+
+let arr: Array<number> = [1,2,3]; // Generic을 이용한 방식. 하지만 거의 사용하지 않는다.
+```
+
+* `null`, `undefined` - null과 undefined 타입
+
+```ts
+let a: null = null;
+let b: undefined = undefined;
+```
+
+* `Tuple` - 튜플은 배열의 길이가 고정되고 각 요소의 타입이 지정되어 있는 배열 형식
+
+```ts
+let arr: [string, number] = ['hi', 10];
+```
+
+* `enum` - 상수들의 집합
+
+```ts
+enum Avengers { Capt, IronMan, Thor }
+
+let hero: Avengers = Avengers.Capt;
+console.log(hero); // 0
+```
+
+* 시작 인덱스를 변경할 수도 있음
+
+```ts
+enum Avengers { Capt = 2, IronMan, Thor }
+
+console.log(Avengers.Capt); // 2
+console.log(Avengers.Thor); // 4
+```
+
+* 임의의 값을 부여할 수도 있음
+
+```ts
+enum Avengers { 
+  Capt = 'Steve Rogers', 
+  IronMan = 'Tony Stark', 
+  Thor = 'Thor Odinson' 
+}
+
+console.log(Avengers.Capt);    // Steve Rogers
+console.log(Avengers.IronMan); // Tony Stark
+```
+
+* `any` - 모든 타입에 대해서 호환되는 타입, 타입스크립트를 점진적으로 적용할때 활용하면 좋은 타입, 타입스크립트로 개발을 시작할때는 **권장되지 않는** 타입.
+* SCG 내에서는 정말 어쩔 수 없는 상황이 아니라면 `any` 를 사용하지 않고 있음 (아직 한번도 그런 상황이 나오지 않음)
+
+```ts
+let str: any = 'hi';
+let num: any = 10;
+let arr: any = ['a', 2, true];
+```
+
+* `unknown` - 코드 작성 당시 타입을 알 수 없을 경우에 사용하는 타입. 유저 입력과 같은 동적인 컨텐츠에 사용될 수 있다.
+
+```ts
+let whoareyou: unknown = 1;
+whoareyou = "string?"; // no error
+whoareyou = false; // no error
+```
+
+얼핏 보면 `any` 와 다를게 없어보이지만, 연산이나 프로퍼티 사용 시 타입 검사를 하지 않으면 에러를 발생시켜 안전하게 사용할 수 있도록 해준다.
+
+```ts
+let iamany: any = "I'm string!"
+let whoareyou: unknown = "I'm string too!"
+
+iamany.length // no error
+iamany + iamany // no error
+whoareyou.length // error
+whoareyou + whoareyou // error
+
+if (typeof whoareyou === "string") {
+  console.log(whoareyou.length) // no error
+}
+```
+
+* `void` - `undefined`와 `null` 만 할당하고, 함수에는 반환 값을 설정할 수 없는 타입
+
+```ts
+let unuseful: void = undefined;
+function notuse(): void {
+  console.log('sth');
+}
+```
+
+* `never` - 함수의 끝에 절대 도달하지 않는다는 의미를 지닌 타입
+
+```ts
+// 이 함수는 절대 함수의 끝까지 실행되지 않는다는 의미
+function neverEnd(): never {
+  while (true) {}
+}
+```
+
+## 𝑓  함수의 타입
+
+함수의 타입을 결정하기 위해서는 다음의 두 가지 정보를 결정해야한다.
+
+* `매개변수(parameter)`의 타입
+
+  매개변수의 타입은 다음과 같은 패턴으로 표기한다.
+
+  ex) `(param1: number)` - number 타입의 인자인 param1
+* `반환값(return value)`의 타입
+
+  반환 타입은 아래와 같은 패턴으로 표기한다.
+
+  ex) `function fn(): number { … }` - number 타입을 반환하는 함수
+
+```ts
+// 자바스크립트
+function sum(a, b) { 
+	return a + b; 
+}
+
+// 함수
+function sum(a: number, b: number): number {
+  return (a + b);
+}
+
+// 화살표 함수
+const sum = (a: number, b: number): number => a + b;
+
+sum(10, 20); // 30
+
+sum(10); // error
+```
+
+## 🤔 타입 추론 (Type Inference)
+
+위에서 변수와 함수에 type annotation으로 타입을 직접 지정해보았다. 하지만 사실, 타입스크립트는 똑똑해서 가능한 모든 곳에서 타입을 알아서 추론해내려고 시도하기 때문에 모든 곳에 일일히 타입을 수동으로 적어줄 필요는 없다.
+
+다음 코드들은 type annotation이 없더라도 타입스크립트가 알아서 타입을 추론해낼 수 있는 일부 예시이다.
+
+```ts
+const age = 12;         // 알아서 number로 인식
+const name = "홍길동";   // 알아서 string으로 인식
+const isAdult = false; // 알아서 boolean으로 인식
+
+// 함수 리턴 타입을 정의해주지 않아도 알아서 number로 인식
+function add(a: number, b: number) {
+	return a + b;
+}
+
+const obj = { name: "hong", age: 12 };
+obj.age = "gildong"  // error
+```
+
+> For the most part you don’t need to explicitly learn the rules of inference. If you’re starting out, try using fewer type annotations than you think - you might be surprised how few you need for TypeScript to fully understand what’s going on.
+
+* [타입스크립트 공식 문서](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-annotations-on-variables)
+
+>
+
+## 🍡 유니온 타입 (Union Type)
+
+자바스크립트 OR연산자 처럼 타입이 A이거나 B임을 의미하는 타입 (`A | B`)
+
+```ts
+function logText(text: string | number) {
+  // text인자는 string이나 number 타입의 변수
+}
+
+logText("hi");
+logText(12);
+logText(false); // error
+```
+
+다음은 유니온 타입을 활용한 예시이다.
+
+```ts
+function welcomePeople(x: string[] | string) {
+	// Type Narrowing
+  if (Array.isArray(x)) {
+    // 해당 스코프에서는 x가 string[]으로 추론되므로 배열 관련 프로퍼티 자동완성 사용 가능
+    console.log("Hello, " + x.join(" and "));
+  } else {
+    // 해당 스코프에서는 x가 string으로 추론됨
+    console.log("Welcome lone traveler " + x);
+  }
+}
+```
+
+## 🎯 타입 별칭 (Type Alias)
+
+타입 별칭(type alias)는 이미 존재하는 타입에 다른 이름을 붙여 복잡한 타입을 간단하게 쓸 수 있도록 하는 역할을 한다.
+
+```ts
+// 사용자가 이해하기 쉬운 이름으로 타입 별칭 생성
+type UUID = string;
+// Union type도 사용 가능
+// 참고 - 구체적인 값을 정해둔 타입: 리터럴 타입 (Literal type)
+type Role = "admin" | "buyer" | "seller";
+
+// 객체에 대한 타입 별칭 지정
+type User = {
+	id: UUID;
+  name: string;
+	role: Role;
+	age?: number;
+};
+
+// 별칭을 지정하여 여러 곳에서 편하게 사용 가능 (가독성도 업)
+// const user: { id: UUID; name: string; role: Role; } = getUser(0);
+const user1: User = getUser(1);
+const user2: User = getUser(2);
+function getUserPost(user: User) { }
+```
+
+이때 타입 별칭은 새로운 **이름만 붙일 뿐 새로운 타입을 생성하는 것이 아니라는 점**에 유의해야 한다. 아래의 예시에서 확인할 수 있듯이 `UUID` 라는 타입이 사용되지 않고 `string` 이 사용되는 것을 확인할 수 있다.
+
+```ts
+type UUID = string;
+
+function getUser(uuid: UUID) {
+  /* 함수 본문 */
+}
+
+// error: Argument of type 'number' is not assignable to parameter of type 'string'.
+getUser(7);
+```
+
+### Intersection Type (`A & B`)
+
+자바스크립트 AND연산 처럼 타입이 A이면서 B임을 의미하는 타입. 아래와 같이 두 가지 타입을 한데 묶어 정의하고 싶을 때 용이하다.
+
+```ts
+type Programmer = { favoriteLanguage: string }; // 프로그래머
+
+type BeerLover = { favoriteBeer: string }; // 맥주를 좋아하는 사람
+
+// 맥주를 좋아하는 프로그래머? => 똑같은 속성을 일일이 복사 붙여넣기 해야되서 불편
+// type BeerLovingProgrammer = { favoriteLanguage: string; favoriteBeer: string; };
+
+// 이럴 때는 Interaction type을 이용
+type BeerLovingProgrammer = Programmer & BeerLover;
+
+const AhnHeejong: BeerLovingProgrammer = { 
+  favoriteLanguage: 'TypeScript',
+  favoriteBeer: 'Imperial Stout',
+};
+```
+
+## 🐬 인터페이스 (Interface)
+
+인터페이스는 `상호간에 정의한 약속 혹은 규칙`을 의미. 타입스크립트에서 인터페이스는 **객체의 타입을 정하기 위해 사용**된다.
+
+* 객체의 속성 정의
+
+```ts
+type UUID = string;
+type Role = "admin" | "buyer" | "seller";
+
+// 객체에 대한 인터페이스 지정
+interface User {
+  id: UUID;
+  name: string;
+  role: Role;
+  age?: number;
+}
+
+// 인터페이스를 여러 곳에서 편하게 사용 가능 (가독성도 업)
+// const user: { id: UUID; name: string; role: Role; } = getUser(0);
+const user1: User = getUser(1);
+const user2: User = getUser(2);
+function getUserPost(user: User) { }
+```
+
+* 클래스 타입 정의
+
+```ts
+interface Vehicle  {
+  name: string;
+  // 함수 프로퍼티 타입 정의
+  setName: (name: string) => number;
+  // 이렇게도 정의 가능	
+  callName(owner: string): void;
+}
+
+class Car implements Vehicle {
+  name = 'My car';
+  
+  setName(name: string) {
+    if (name.length === 0) return -1;
+    this.name = name;
+    return 0;
+  }
+
+  callName(owner: string) {
+    console.log(`${owner}'s ${this.name}`);
+  }
+  
+  constructor() {}
+}
+```
+
+* ⭐️ **인터페이스의 확장**
+
+인터페이스는 인터페이스 상호간의 확장도 가능하다. 아래의 예시를 통해 확인해 보자.
+
+```ts
+interface User {
+  name: string;
+  height: number;
+  age: number;
+  region?: string;
+  favoriteLanguage?: string;
+}
+```
+
+위의 예시는 여러 속성들을 가지는 `User` 라는 이름의 인터페이스이다. 이러한 속성들에 더해 로그인 시간을 나타내는 속성이 추가된 유저 인터페이스를 정의하려고 한다고 하자.
+
+```ts
+interface LoggedInUser {
+  name: string;
+  height: number;
+  age: number;
+  region?: string;
+  favoriteLanguage?: string;
+  loggedInAt: Date; // 새로 추가된 속성
+}
+```
+
+다음의 방식으로 가능은 하겠지만 이미 정의된 `User` 라는 인터페이스의 코드와 매우 중복된다. 이러한 중복은 인터페이스의 확장 기능을 이용해 줄일 수 있다. 인터페이스의 확장은 `extends` 라는 키워드를 활용한다.
+
+```ts
+interface LoggedInUser extends User {
+  loggedInAt: Date;
+}
+```
+
+중복성을 줄이면서도 기존의 코드를 확장시킬수 있다는 점에서 인터페이스의 확장은 매우 용이하다.
+
+또한 아래의 예시처럼 여러 인터페이스들을 동시에 확장하는 것도 가능하다.
+
+```ts
+interface ElectricDevice {
+  voltage: number;
+}
+
+interface SquareShape {
+  width: number;
+  height: number;
+}
+
+interface Laptop extends ElectricDevice, SquareShape {
+  color: string;
+}
+```
+
+## 🥊 타입 별칭 vs 인터페이스
+
+인터페이스는 타입 별칭과 매우 유사하며, 대부분의 경우 둘 중 하나를 자유롭게 선택하여 사용 가능하다.
+
+위의 인터페이스 섹션에서 살펴본 클래스의 타입 정의는 타입 별칭을 사용해도 그대로 사용이 가능하고, 타입 확장 또한 `intersection` 을 통해 가능하다.
+
+```ts
+// 타입 별칭으로 클래스 타입 정의
+type Vehicle = {
+	name: string;
+	setName: (name: string) => number;
+	callName(owner: string): void;
+}
+
+class Car implements Vehicle {
+
+}
+
+/////////////////////
+// Intersection을 이용하여 타입 확장
+type User = {
+  name: string;
+  height: number;
+	age: number;
+	region?: string;
+  favoriteLanguage?: string;
+}
+
+type LoggedInUser = User & {
+  loggedInAt: Date;
+}
+```
+
+둘은 뭐가 다른것일까? 대표적인 차이점은 다음과 같다.
+
+* **타입 별칭은 새로운 타입 생성 X,  인터페이스는 새로운 타입 O**
+  앞에서 언급했지만 타입별칭은 단순 타입의 별명이여서 새로운 타입으로 취급되지 않는다. 반면, 인터페이스는 하나의 새로운 타입으로 정의된다.
+* **타입 별칭은 선언 병합(declaration merging) 불가 X, 인터페이스는 선언 병합 가능 O**
+
+```ts
+interface Mammal {
+    genus: string
+}
+
+interface Mammal {
+    breed: string
+}
+
+const animal: Mammal = {
+    genus: "1234",
+    breed: "a"
+}
+////////////////////////
+type Reptile = {
+    genus: string
+}
+
+// Error: Duplicate identifier 'Reptile'.
+type Reptile = {
+    breed: string
+}
+```
+
+* **타입 별칭은 원시 타입 이름 지정 가능, 인터페이스는 객체 타입만 지정 가능**
+
+```ts
+// 타입 별칭을 사용하여 이미 존재하는 원시 타입에 대해 커스텀한 이름을 붙여줄 수 있음.
+type SanitizedString = string
+type EvenNumber = number
+
+// 인터페이스는 불가능
+interface X extends string {}
+```
+
+그렇다면 어떤 것을 사용해야할까? 정해진 답은 없다. 각자의 기호에 맞게, 팀 규칙에 맞게 선택하여 사용하면 된다. 타입스크립트 공식 문서에서는 뭘 선택해야할지 모르겠다면 우선 `interface` 를 사용하고 `type` 의 기능이 필요해지면 `type` 을 사용하라고 안내하고 있다.
+
+> If you would like a heuristic, use `interface` until you need to use features from `type`.
+
+* [타입스크립트 공식 문서](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#differences-between-type-aliases-and-interfaces)
+
+>
+
+SCG 내에서도 객체의 타입은 `interface` 로 정의하고 있다.
+
+* 객체 타입을 `interface` 로 정의하기 어려운 경우?
+  * 해당 문서에서는 다루지 않으나, 대표적인 예로 다음과 같이 object key mapping을 사용하려면 타입 별칭을 사용해야만 한다.
+
+```ts
+const breakpoints = { sm: 768, md: 1280, lg: 1920 };
+
+type Breakpoint = keyof typeof breakpoints;
+
+// type - 에러 없음
+type ScreenMediaQuery = {
+  [key in Breakpoint]: string;
+};
+
+// interface - 에러 (A mapped type may not declare properties or methods.)
+interface ScreenMediaQuery {
+  [key in Breakpoint]: string;
+};
+```
+
+## 🧩 제너릭 (Generic)
+
+* 제너릭의 필요성
+
+자바스크립트로 작성된 함수가 있다. 이 함수는 인자로 받은 값을 그대로 반환하는 함수이다.
+
+```js
+function returnFunc(arg){
+  return arg;
+}
+```
+
+위 함수를 타입스크립트에 맞게 바꾼다고 하면 다음과 같다.
+
+```ts
+// number 타입의 매개변수를 return하는 함수
+function numberReturnFunc(arg: number): number {
+  return arg;
+}
+
+// string 타입의 매개변수를 return하는 함수
+function stringReturnFunc(arg: string): string {
+  return arg;
+}
+
+// boolean 타입의 매개변수를 return하는 함수
+function booleanReturnFunc(arg: boolean): boolean {
+  return arg;
+}
+
+```
+
+타입스크립트는 인자의 타입을 지정해주어야 하므로 다음과 같이 인자의 타입에 따라 매번 다른 함수를 정의해 주어야하므로 매우 번거롭다. 물론 Union Type을 이용하면 하나의 함수로 합칠 수 있을 것이다.
+
+```ts
+type NewType = number | string | boolean 
+
+function ReturnFunc(arg: NewType): NewType {
+  return arg;
+}
+
+```
+
+하지만, 이 역시 문제점이 있다. 어떠한 타입에서라도 **범용성 있게 함수가 작동**할 수 있도록 하려면, 함수의 타입을 끊임없이 나열해야한다. 또 설령 나열한다해도 예상치 못한 타입 (예를 들어 `number[]`)이 등장하면 에러를 일으키게 될 것이다. 그렇다면 `any` 타입을 이용하는 것은 어떨까?
+
+```ts
+function anyReturnFunc(arg: any): any {
+  return arg;
+}
+
+let num = anyReturnFunc(123); 
+let str = anyReturnFunc('ABC');
+```
+
+`any` 타입을 이용해 범용성은 지켰지만, `any` 타입을 반환하여 어떤 타입인지 추론이 제대로 이뤄지지 않는다.  이러한 문제를 해결할 수 있는 것이 바로 `제너릭`이다.
+
+* 제너릭의 형태와 사용
+  * 제너릭의 정의
+
+    `제너릭 = 타입 변수`
+
+    요소를 사용하는 시점에서 **동적으로 부여되는 타입을 담아둘 공간**이 필요한데 그것을 `타입 변수`라고 할 수 있다. 이는 `함수의 매개변수, 인자 값`의 관계와 매우 유사하다.
+    * 함수의 매개변수, 인자 값의 관계
+
+```ts
+function addFive(num: number){ // num 이라는 매개변수
+  return num + 5; // 함수가 실행되기 전까지는 num이 무슨 값인지 모름
+}
+
+addFive(5); // 인자값으로 5를 부여 => 이때부터 num이라는 매개변수는 5라는 인자값으로 치환
+```
+
+함수가 호출되기 전까지 매개변수 `num` 값은 정해지지 않는다. 이는 다시 말하면 함수에게 **동적으로 값을 부여**할 수 있음을 의미한다.
+
+* 함수 매개변수, 인자 vs 제너릭(타입변수)
+
+|       | 함수 인자                            | 제너릭                             |
+| ----- | -------------------------------- | ------------------------------- |
+| 정의 방식 | 매개변수 `a: number`                 | 타입 변수 `<T>` (T가 아닌 다른 이름이어도 OK) |
+| 정의 예시 | `function func(a: number) {...}` | `type MyArray<T> = T[]`         |
+| 사용 예시 | `func(3); func(42);`             | `MyArray<number>`               |
+
+* 제너릭과 함수
+
+  제너릭을 함수에 적용하는 것은 다음과 같은 형태로 이뤄진다.
+
+```ts
+function genericFunc<T>(arg: T): T{
+  
+}
+
+// 화살표 함수: 컴파일러에게 제너릭임을 알려주기 위해 <T, >와 같은 형태를 사용
+const genericArrowFunc = <T, >(arg: T): T => {
+  
+}
+```
+
+이제 제너릭을 이용해 앞서 예시로든 문제를 해결해 볼 수 있다.
+
+```ts
+function generalReturnFunc<T>(arg: T): T {
+  return arg;
+}
+
+let num = generalReturnFunc<number>(123);
+let str = generalReturnFunc<string>('ABC');
+```
+
+제너릭을 이용하면 범용성을 챙김과 동시에 타입 추론도 원활하게 이뤄지는 것도 확인할 수 있다.
+
+* 제너릭의 활용
+
+```ts
+Array<number> // number 타입의 요소들로 이루어진 배열임을 선언
+
+// 인터페이스와 제너릭을 활용해 범용성 있는 타입을 정의
+interface ScoreBoard<T> {
+  semester1: T[],
+  semester2: T[],
+}
+
+let scoreNumbers: ScoreBoard<number> = {
+  semester1: [4.5, 4.5],
+  semester2: [4.0, 4.5], 
+};
+
+let scoreStrings: ScoreBoard<string> = {
+  semester1: ['A+', 'A+'],
+  semester2: ['A', 'A+'],
+}
+```
+
+* 제너릭과 제약 조건
+
+  제너릭으로 범용성을 확보할 수 있지만 반대로 범용성으로 인해 생기는 단점들도 존재한다.
+
+```ts
+function logText<T>(text: T): T {
+  console.log(text.length); // Error: T doesn't have .length
+  return text;
+}
+```
+
+가령 인자로 받은 객체의 `length` 속성을 사용하는 함수를 만들었는데 인자의 타입을 위와 같이 선언한다면, 함수 자체에서 에러가 발생할 것이다. 이러한 상황에서는 제너릭의 타입을 제한 시킬 필요가 있다.
+
+```ts
+interface LengthWise {
+  length: number;
+}
+
+function logText<T extends LengthWise>(text: T): T {
+  console.log(text.length);
+  return text;
+}
+
+logText(10); // Error, 숫자 타입에는 length 프로퍼티가 존재하지 않으므로 오류 발생
+logText('hi'); // 문자열은 length 프로퍼티를 가지고 있으므로 정상 작동
+logText({ length: 0, value: false }); // `text.length` 코드는 객체의 속성 접근과 같이 동작하므로 오류 없음
+```
+
+위와 같이 선언하면 `length` 라는 객체를 가지는 모든 타입들에 대해서 함수가 인자로 받아들일 수 있다.
+
+### **실습**
+
+다음과 같은 데이터를 보내주는 API를 개발하려고 합니다. 코드를 작성하기 위해 먼저 API 타입을 작성해주세요!
+
+* 역할
+  * admin, professor, student 셋 중 하나
+* 유저
+  * 유저 아이디 (숫자)
+  * 이름 (문자열)
+  * 역할
+* 유저 리스트
+  * 총 페이지 수 (숫자)
+  * 현재 페이지 (숫자)
+  * 리스트 (유저 배열)
+* 게시글
+  * 게시글 아이디 (숫자)
+  * 제목 (문자열)
+  * 내용 (문자열)
+  * 작성자 (유저)
+  * 공지글 여부 (불리언, optional)
+* 게시글 리스트
+  * 총 페이지 수 (숫자)
+  * 현재 페이지 (숫자)
+  * 리스트 (게시글 배열)
+* **정답**
+
+```ts
+// 역할 타입
+type Role = "admin" | "professor" | "student";
+
+// 유저 타입
+interface User {
+  id: number;
+  name: string;
+  role: Role;
+}
+
+// 게시글 타입
+interface Post {
+  id: number;
+  title: string;
+  content: string;
+  author: User;
+  isNotice?: boolean;
+}
+
+// 리스트 데이터 타입
+// 제너릭을 통해 모든 리스트 데이터에 대한 타입을 general하게 가져갈 수 있다.
+// e.g. PaginationData<User> -> 유저 리스트 타입
+interface PaginationData<T> {
+  totalPages: number;
+  pageNumber: number;
+  content: T[];
+}
+```
+
+## 🎹 클래스 (Class)
+
+자바스크립트의 `class`는 ES6부터 지원되었으며 객체 지향적 구조화 수단으로 사용되는 키워드이다. 타입스크립트의 `class` 는 이의 상위집합으로 여러 추가 기능이 제공된다.
+
+클래스는 크게 다음의 멤버들을 가진다.
+
+* 생성자(`constructor`) - 인스턴스 생성시 호출
+* 속성
+* 메소드
+
+클래스는 다음의 형태로 작성 및 사용된다.
+
+```tsx
+class BarkingDog {
+	// 속성
+  barkingSound: string;
+  
+	// 생성자
+  constructor(barkingSound: string) {
+    this.barkingSound = barkingSound;
+  }
+  
+	// 메소드
+  bark(): void {
+    console.log(`${this.barkingSound}!`);
+  }
+}
+
+// 인스턴스 생성시 new 키워드와 생성자를 사용
+const barkingDog: BarkingDog = new BarkingDog('월');
+barkingDog.bark(); // 월!
+```
+
+타입스크립트에서 클래스는 ES6 클래스에 더해 추가적인 기능들이 제공된다.
+
+* 접근 제한자(`public`, `private`, `protected`)
+* `readonly`
+* `static`
+* 추상 클래스(`abstract class`)
+
+이에 대해서는 양이 너무 방대해서 아래 참고자료를 참고하는 것으로 대체한다.
+
+[TypeScript - Class | PoiemaWeb](https://poiemaweb.com/typescript-class)
+
+⭐️  클래스는 클래스 뿐만 아니라  `interface` 와 특별한 관계를 가진다.
+
+* 클래스의 인터페이스 구현(`implements`)
+
+```ts
+interface Animal {
+  legs: number;
+}
+
+// error TS2420: Class 'Dog' incorrectly implements interface 'Animal'.
+// Property 'legs' is missing in type 'Dog'.
+class Dog implements Animal { } 
+
+// Okay
+class Dog implements Animal {
+  legs: number = 4;
+}
+
+```
+
+* 인터페이스의 클래스 확장(`extends`)
+
+```ts
+class Point {
+    x: number;
+    y: number;
+}
+
+interface Point3d extends Point {
+    z: number;
+}
+
+const point3d: Point3d = {x: 1, y: 2, z: 3};
+```
+
+## 🛡 타입 가드 (Type Guard)
+
+필요에 따라 타입의 제한이 필요한 경우가 있다. 이때 사용하는 것이 바로 `타입 가드`이다. 제어 흐름 분석 키워드(`if`, `for`, `while` `switch` 등)를 기반으로 타입가드를 적절히 사용해 타입을 특정하여 특정 코드가 실행되게 하고 싶을때 용이하다.
+
+* `typeof` 연산자
+
+하나의 인자를 받아 해당 인자가 어떤 타입인지를 반환한다. 반환되는 값은 아래와 같다. 반환되는 값은 리터럴 문자열인 점에 유의해야한다. 또한 `null` 의 `typeof` 반환값이 “object” 인 것은 오타가 아니다. `symbol` 타입이 궁금하다면 [링크](https://poiemaweb.com/es6-symbol#:~\:text=%231.%20Symbol%EC%9D%B4%EB%9E%80%3F,%EA%B0%9C%EC%9D%98%20%ED%83%80%EC%9E%85%EC%9D%84%20%EA%B0%80%EC%A7%80%EA%B3%A0%20%EC%9E%88%EC%97%88%EB%8B%A4.\&text=%EC%8B%AC%EB%B3%BC\(symbol\)%EC%9D%80%20ES6%EC%97%90%EC%84%9C,%EC%9B%90%EC%8B%9C%20%ED%83%80%EC%9E%85%EC%9D%98%20%EA%B0%92%EC%9D%B4%EB%8B%A4.)를 참고할 것.
+
+| 타입        | typeof 반환값  |
+| --------- | ----------- |
+| undefined | “undefined” |
+| null      | "object”    |
+| boolean   | “boolean”   |
+| number    | “number”    |
+| string    | “string”    |
+| symbol    | "symbol”    |
+| function  | “function”  |
+| 그 외 모든 객체 | “object”    |
+
+```ts
+function padLeft(value: string, padding: string | number) {
+  if (typeof padding === "number") {
+    return Array(padding + 1).join(" ") + value;
+  }
+  
+  if (typeof padding === "string") {
+    return padding + value;
+  }
+  
+  throw new Error(`Expected string or number, got '${padding}'.`);
+}
+```
+
+* `instanceof` 연산자
+
+`instacneof` 연산자는 값과 생성자를 인자로 받아 주어진 값이 어떤 클래스에 속하는지 확인한다.
+
+```ts
+interface Padder {
+  getPaddingString(): string;
+}
+
+class SpaceRepeatingPadder implements Padder {
+  constructor(private numSpaces: number) { }
+  getPaddingString() {
+    return Array(this.numSpaces + 1).join(" ");
+  }
+}
+
+class StringPadder implements Padder {
+  constructor(private value: string) { }
+  getPaddingString() {
+    return this.value;
+  }
+}
+
+function getRandomPadder() {
+  return Math.random() < 0.5 ?
+    new SpaceRepeatingPadder(4) :
+    new StringPadder("  ");
+}
+
+// 이 시점에선 'SpaceRepeatingPadder | StringPadder'
+let padder: Padder = getRandomPadder();
+
+if (padder instanceof SpaceRepeatingPadder) {
+  padder; // SpaceRepeatingPadder 로 좁혀짐
+}
+
+if (padder instanceof StringPadder) {
+  padder; // StringPadder 로 좁혀짐
+}
+```
+
+* `in` 연산자
+
+`in` 연산자는 객체에 특정 속성이 존재하는지 여부를 확인할 때 사용된다.
+
+```ts
+interface Dog {
+  legs: 4;
+  bark(): void;
+}
+
+interface Insect {
+  legs: number;
+  creepy: boolean;
+}
+
+interface Fish {
+  swim(): void;
+}
+
+type Animal = Dog | Insect | Fish;
+
+function doSomethingWithAnimal(animal: Animal) {
+  if ('legs' in animal) {
+    // animal은 Dog | Insect 타입
+    console.log(animal.legs);
+  } else {
+    // animal은 Fish 타입
+    animal.swim();
+  }
+}
+```
+
+## 📑 d.ts
+
+타입스크립트는 자바스크립트를 기반으로 타입을 얹어서 완성되는 형태이다. 덕분에 많은 기존의 자바스크립트 라이브러리가 타입스크립트 상에서도 사용이 가능했던 것이다. 다만, 이를 위해서는 반드시 이러한 모듈에서 사용된 타입들을 명시해줄 필요가 있는데 이러한 타입들이 담긴 파일이 `*.d.ts` 들이다. 이러한 파일들은 타입스크립트 코드가 잘 추론되도록 도와주는 역할을 한다.
+
+### [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped)
+
+이러한 `*.d.ts` 파일을 작성함으로써 타입스크립트에서도 원활한 호환이 될수 있게 진행되고 있는 오픈소스 프로젝트가 `DefinitelyTyped` 이다. 일부 공식적으로 타입스크립트를 지원하거나 위 오픈소스 프로젝트를 거쳐서 탄생하는 것이 `@types/react`, `@types/three` 등 앞에 `@types` 가 붙은 패키지들이다. 해당 패키지들을 살펴보면 안에 `*.d.ts` 파일들로 라이브러리에 대한 타입이 정의되어 있음을 확인할 수 있다.
+
+혹여나, 이러한 것이 없는 경우 사용자가 직접 `*.d.ts` 파일을 생성해 타입스크립트와 호환하게 할 수 있다.
+
+`*.d.ts` 파일은 다음의 형태를 가진다.
+
+```js
+export declare const pi = 3.14;
+
+export declare namespace myLib {
+  function greet(person: string): string;
+  let name: string;
+}
+```
+
+실제 프로젝트에서도 이러한 형태를 살펴볼 수 있다.
+
+NextJS 프레임워크에서 Image를 렌더링하는 경우를 예시로 들어보자.
+
+```ts
+
+import Image from "next/image";
+
+export default function Home() {
+  return (
+    <Container>
+			 
+      <Title title="NextJS TypeScript Template" />
+      <Image src="/vercel.svg" alt="vercel" width="100px" height="100px" />
+    </Container>
+  );
+}
+```
+
+이 코드에서 사용중인 `Image` 모듈을 trace해보면 다음의 파일을 확인해볼 수 있다.
+
+* `node_modules/next/dist/client/image.d.ts`
+
+```ts
+
+export declare type ImageProps = Omit<JSX.IntrinsicElements['img'], 'src' | 'srcSet' | 'ref' | 'width' | 'height' | 'loading'> & {
+    src: string | StaticImport;
+    width?: number | string;
+    height?: number | string;
+    layout?: LayoutValue;
+    loader?: ImageLoader;
+    quality?: number | string;
+    priority?: boolean;
+    loading?: LoadingValue;
+    lazyRoot?: React.RefObject<HTMLElement> | null;
+    lazyBoundary?: string;
+    placeholder?: PlaceholderValue;
+    blurDataURL?: string;
+    unoptimized?: boolean;
+    objectFit?: ImgElementStyle['objectFit'];
+    objectPosition?: ImgElementStyle['objectPosition'];
+    onLoadingComplete?: OnLoadingComplete;
+};
+export default function Image({ src, sizes, unoptimized, priority, loading, lazyRoot, lazyBoundary, className, quality, width, height, style, objectFit, objectPosition, onLoadingComplete, placeholder, blurDataURL }: ImageProps): JSX.Element;
+```
+
+위 파일에서 선언된 `Image` 와 `ImageProps` 타입 덕분에 `next/image` 를 import 하면 Image 컴포넌트와 관련 props를 원활하게 사용할 수 있는 것이다.
+
+필요할 경우 d.ts 파일을 직접 어떻게 작성해야되는지 궁금할텐데 필요하면 아래 링크에서 제공하는 템플릿과 제작법을 참고해보자.
+
+[TypeScript 한글 문서](https://typescript-kr.github.io/pages/declaration-files/templates.html)
+
+[TypeScript 한글 문서](https://typescript-kr.github.io/pages/declaration-files/creating-dts-files-from-js.html)
